@@ -1,201 +1,66 @@
-# from tkinter import *
-# from tkinter.ttk import *
-# import time
-
-# progressBarTime = 45
-# root = Tk()
-# ran = False
-# progress = Progressbar(root, orient = HORIZONTAL, length = 100, mode = 'determinate',maximum=100,value=5)
-# progress.pack(pady = 10)
-
-# def bar():
-#     length = progressBarTime*60
-#     initialTime = 0
-#     while(initialTime<length):
-#         if((initialTime%27)==0):
-#             print('percentage at '+str(initialTime)+" seconds")
-#             progress.step(1000)
-#         initialTime+=1
-#         print(initialTime)
-#         time.sleep(1)
-
-  
-
-  
-# # This button will initialize
-# # the progress bar
-# if(not ran):
-#     bar()
-#     ran = True
-  
-# # infinite loop
-# mainloop()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#@author: Kaleb Morgan
+#@useCase: Sending download via WiFi to keep user informed
+#of the happening of their PC.
 from tkinter import *
 from tkinter.ttk import *
 import time
 
+#Time you want the progress bar to run for (in minutes)
 progressBarTime = 45
+#Title of the window
 title = "Download"
+#TKinter object
 root = Tk()
+#Setting the title to the title variable mentioned above
 root.title( title)
+#Setting the icon in the top right of the screen(must be .ico file type)
+root.iconbitmap(r'E:\code projects\Progress Bar\SRAppIconWBG.ico')
+#Checks if the bar has already ran or not(prevent looping)
 ran = False
+#String variable to keep label words in one variable(helps us change the message when the progress bar is finished)
 textr = StringVar()
+#Adding a label with text = String variable above
 label = Label(root,textvariable=textr)
+#Setting the value of the String var to what we want the label to say.
 textr.set("Downloading...")
+#Double variable to keep track of bar progress(would have to use threading to get to work)
 var1 = DoubleVar(root)
+#Making the progress bar object with max value the progress time in seconds
 progress = Progressbar(root, orient = HORIZONTAL, length = 600, mode = 'determinate',maximum=(progressBarTime*60),variable=var1)
+#Adding padding to the label
 label.pack(pady=(30,0))
+#Adding padding to the progress bar
 progress.pack(padx = 30,pady=(10,40))
 
-
+#Method to start the progress bar counting at 1 step per second.
 def bar():
     progress.start(1000)
 
+#Method to show the new message once progress bar is completed
 def newMessage():
+    #Stop the progress bar
     progress.stop()
+    #Set the label var = new message
     textr.set("Download Complete!")
+    #Make a button for the user to close the window easily
     button = Button(root,text="Close Window",command=doTheQuit)
+    #Add padding to the button
     button.pack(pady=(0,25))
 
+#Method to quit the program
 def doTheQuit():
     root.quit()
 
   
-# This button will initialize
-# the progress bar
+#Initialize the progress bar
 if(var1.get()<=100):
     bar()
 ran = True
 
+#Wait one second before the amount of time is up to display new
+#message and stop the progress bar. This prevents the overall
+#progress bar from looping endlessly once it reaches the end.
 root.after(int((progressBarTime*60-1)*1000),newMessage)
   
 # infinite loop
 mainloop()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# from tkinter import *
-# from tkinter.ttk import *
-# import threading
-# import time
-
-# threading.Thread
-# progressBarTime = 45
-# root = Tk()
-
-# # create progressbar
-# variable = DoubleVar(root)
-
-# ran = False
-# label = Label(root,text="Downloading...")
-# pP = StringVar()
-# progress = Progressbar(root, orient = HORIZONTAL, length = 600, mode = 'determinate',maximum=(progressBarTime*60),value=5,variable=variable)
-# progressPercentage = Label(root,textvariable=pP)
-# label.pack(pady=(30,0))
-# progress.pack(padx = 30,pady=(10,40))
-# progressPercentage.pack()
-
-
-# def bar():
-#     init = 0
-#     while(init<=progressBarTime*60):
-#         progress.step()
-#         pP.set(str(((variable.get()/2700)*100)))
-#         root.update()
-#         init+=1
-#         time.sleep(1)
-    
-
-  
-
-  
-# # This button will initialize
-# # the progress bar
-# if(not ran):
-#     bar()
-#     ran = True
-  
-# # infinite loop
-# mainloop()
-
-
-
-
-
-
-
-
-
-# class ProgressBar(threading.Thread):
-#     def __init__(self):
-#         # threading.Thread.__init__(self)
-#         self.title = "Some Other Download"
-#         self.progressBarTime = 45
-#         self.value = 0
-    
-#     def start(self):
-#         self.root = Tk()
-#         self.variable = DoubleVar(self.root)
-
-#         self.label = Label(self.root,text="Downloading...")
-#         self.pP = StringVar()
-#         self.progress = Progressbar(self.root, orient = HORIZONTAL, length = 600, mode = 'determinate',maximum=(self.progressBarTime*60),value=5,variable=self.variable)
-#         self.progressPercentage = Label(self.root,textvariable=self.pP)
-#         self.label.pack(pady=(30,0))
-#         self.progress.pack(padx = 30,pady=(10,40))
-#         self.progressPercentage.pack()
-
-#         self.startProgress()
-#         self.root.mainloop()
-    
-#     def startProgress(self):
-#         init = 0
-#         while(init<=self.progressBarTime*60):
-#             self.progress.step()
-#             init+=1
-#             new_thread = threading.Thread(target=self.changeLabel)
-#             new_thread.setDaemon(True)
-#             new_thread.start()
-#             time.sleep(1)
-    
-#     def changeLabel(self):
-#         self.pP.set(str(((self.variable.get()/2700)*100)))
-#         self.root.update()
-
-
-# if __name__ == '__main__':
-#     progress = ProgressBar()
-#     progress.start()
