@@ -8,13 +8,13 @@ import time
 #Time you want the progress bar to run for (in minutes)
 progressBarTime = 45
 #Title of the window
-title = "Download"
+title = "Strategic Online Systems Downloader"
 #TKinter object
 root = Tk()
 #Setting the title to the title variable mentioned above
 root.title( title)
 #Setting the icon in the top right of the screen(must be .ico file type)
-root.iconbitmap(r'E:\code projects\Progress Bar\SRAppIconWBG.ico')
+root.iconbitmap(r'E:\code projects\Progress Bar\CWIcon.ico')
 #Checks if the bar has already ran or not(prevent looping)
 ran = False
 #String variable to keep label words in one variable(helps us change the message when the progress bar is finished)
