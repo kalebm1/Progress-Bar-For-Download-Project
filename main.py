@@ -8,13 +8,13 @@ import time
 #Time you want the progress bar to run for (in minutes)
 progressBarTime = 45
 #Title of the window
-title = "Strategic Online Systems Downloader"
+title = "Dragon 14 Download Status"
 #TKinter object
 root = Tk()
 #Setting the title to the title variable mentioned above
 root.title( title)
 #Setting the icon in the top right of the screen(must be .ico file type)
-root.iconbitmap(r'E:\code projects\Progress Bar\CWIcon.ico')
+root.iconbitmap(r'./lib/CWIcon.ico')
 #Checks if the bar has already ran or not(prevent looping)
 ran = False
 #String variable to keep label words in one variable(helps us change the message when the progress bar is finished)
@@ -22,7 +22,7 @@ textr = StringVar()
 #Adding a label with text = String variable above
 label = Label(root,textvariable=textr)
 #Setting the value of the String var to what we want the label to say.
-textr.set("Downloading...")
+textr.set("Downloading Dragon 14 files...")
 #Double variable to keep track of bar progress(would have to use threading to get to work)
 var1 = DoubleVar(root)
 #Making the progress bar object with max value the progress time in seconds
@@ -41,7 +41,7 @@ def newMessage():
     #Stop the progress bar
     progress.stop()
     #Set the label var = new message
-    textr.set("Download Complete!")
+    textr.set("Download Complete! Please wait a few minutes while we install it for you.")
     #Make a button for the user to close the window easily
     button = Button(root,text="Close Window",command=doTheQuit)
     #Add padding to the button
